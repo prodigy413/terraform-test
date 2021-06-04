@@ -30,6 +30,6 @@ jobs:
       - name: Check terraform version
         working-directory: ./
         run: |
-          terraform version
+          terraform apply
           echo "Yeah!!!!"
 
