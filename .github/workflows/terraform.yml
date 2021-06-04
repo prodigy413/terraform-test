@@ -25,13 +25,13 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 0.15.4
+          terraform_version: 0.15.5
 
       - name: Check terraform version
         working-directory: ./
         run: |
           terraform init
-          terraform apply
+          terraform apply -auto-approve
 
       - name: The job has succeeded
         if: ${{ success() }}
