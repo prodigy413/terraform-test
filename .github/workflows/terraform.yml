@@ -30,6 +30,7 @@ jobs:
       - name: Check terraform version
         working-directory: ./
         run: |
+          terraform init
           terraform apply
 
       - name: The job has succeeded
