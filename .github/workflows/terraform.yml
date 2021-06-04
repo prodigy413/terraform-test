@@ -31,5 +31,14 @@ jobs:
         working-directory: ./
         run: |
           terraform apply
-          echo "Yeah!!!!"
+
+      - name: The job has succeeded
+        if: ${{ success() }}
+        run: |
+          echo "Succeeded!!!"
+
+      - name: The job has failed
+        if: ${{ failure() }}
+        run: |
+          echo "Failed!!!"
 
