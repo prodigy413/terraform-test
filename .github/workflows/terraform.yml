@@ -28,7 +28,7 @@ jobs:
           terraform_version: 0.15.5
 
       - name: Check terraform version
-        working-directory: ./
+        working-directory: ./dev
         run: |
           terraform init
           terraform apply -auto-approve
