@@ -4,12 +4,10 @@ on:
   pull_request:
     branches:
       - main
-    types: [closed]
 
 jobs:
-  deploy_terraform:
+  dev_check:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
 
     steps:
       - name: Checkout
@@ -25,13 +23,23 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 0.15.5
+          terraform_version: 1.0.0
 
-      - name: Check terraform version
+      - name: Terraform Init
+        id: init
+        working-directory: ./dev
+        run: terraform init
+
+      - name: Terraform Validate
+        id: calidate
+        working-directory: ./dev
+        run: terraform validate
+
+      - name: Terraform Plan
+        id: plan
         working-directory: ./dev
         run: |
-          terraform init
-          terraform apply -auto-approve
+          terraform plan
 
       - name: The job has succeeded
         if: ${{ success() }}
@@ -43,3 +51,29 @@ jobs:
         run: |
           echo "Failed!!!"
 
+#  dev_apply:
+#    runs-on: ubuntu-latest
+#    if: github.event.pull_request.merged == true
+#
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v2
+#
+#      - name: Configure AWS Credentials
+#        uses: aws-actions/configure-aws-credentials@v1
+#        with:
+#          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#          aws-region: ap-northeast-1
+#
+#      - name: Setup Terraform
+#        uses: hashicorp/setup-terraform@v1
+#        with:
+#          terraform_version: 1.0.0
+#
+#      - name: Terraform Apply
+#        id: apply
+#        working-directory: ./dev
+#        run: |
+#          terraform apply -auto-apply
+#
