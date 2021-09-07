@@ -1,7 +1,8 @@
 name: Test Terraform
 
 on:
-  pull_request:
+#  pull_request:
+  push:
     branches:
       - main
 
@@ -25,6 +26,11 @@ jobs:
         with:
           terraform_version: 1.0.0
 
+      - name: Terraform Fmt
+        id: fmt
+        working-directory: ./dev
+        run: terraform fmt -check
+
       - name: Terraform Init
         id: init
         working-directory: ./dev
@@ -38,18 +44,8 @@ jobs:
       - name: Terraform Plan
         id: plan
         working-directory: ./dev
-        run: |
-          terraform plan
-
-      - name: The job has succeeded
-        if: ${{ success() }}
-        run: |
-          echo "Succeeded!!!"
-
-      - name: The job has failed
-        if: ${{ failure() }}
-        run: |
-          echo "Failed!!!"
+        run: terraform plan
+          
 
 #  dev_apply:
 #    runs-on: ubuntu-latest
