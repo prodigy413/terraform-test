@@ -32,6 +32,11 @@ jobs:
         working-directory: ./dev
         run: terraform init
 
+      - name: Terraform Validate
+        id: validate
+        working-directory: ./dev
+        run: terraform init
+
       - name: Terraform Apply
         id: apply
         working-directory: ./dev
