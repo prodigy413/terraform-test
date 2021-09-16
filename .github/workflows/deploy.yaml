@@ -27,6 +27,11 @@ jobs:
         with:
           terraform_version: 1.0.0
 
+      - name: Terraform Init
+        id: init
+        working-directory: ./dev
+        run: terraform init
+
       - name: Terraform Apply
         id: apply
         working-directory: ./dev
