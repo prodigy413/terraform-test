@@ -50,7 +50,7 @@ jobs:
     if: github.event.pull_request.merged == true
 
     steps:
-      - name: Terraform Apply
+      - name: Terraform Apply Test
         id: apply
         working-directory: ./dev
         run: terraform apply -auto-approve
