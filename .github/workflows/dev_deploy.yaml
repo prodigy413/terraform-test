@@ -1,13 +1,15 @@
-name: Test Terraform
+name: Deploy Terraform
 
 on:
   pull_request:
     branches:
       - main
+    types: [closed]
 
 jobs:
-  dev_check:
+  dev_apply:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
 
     steps:
       - name: Checkout
@@ -25,22 +27,12 @@ jobs:
         with:
           terraform_version: 1.0.0
 
-      - name: Terraform Fmt
-        id: fmt
-        working-directory: ./dev
-        run: terraform fmt -check
-
       - name: Terraform Init
         id: init
         working-directory: ./dev
         run: terraform init
 
-      - name: Terraform Validate
-        id: calidate
+      - name: Terraform Apply
+        id: apply
         working-directory: ./dev
-        run: terraform validate
-
-      - name: Terraform Plan
-        id: plan
-        working-directory: ./dev
-        run: terraform plan
+        run: terraform apply -auto-approve
