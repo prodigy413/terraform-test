@@ -46,8 +46,8 @@ jobs:
 
       - name: test01
         run: |
-          echo "${{ ECR_REGISTRY }}"
+          echo "${{ env.ECR_REGISTRY }}"
 
       - name: test02
         run: |
-          echo "${{ ECR_REGISTRY }}"
+          echo "${{ env.ECR_REGISTRY }}"
