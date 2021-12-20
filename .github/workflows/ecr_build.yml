@@ -39,10 +39,15 @@ jobs:
           IMAGE_TAG: "1.0"
         run: |
           echo "$ECR_REGISTRY"
+          export ECR_REGISTRY=$ECR_REGISTRY
 #          cd ./image/
 #          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
 #          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-      - name: test
+      - name: test01
+        run: |
+          echo "$ECR_REGISTRY"
+
+      - name: test02
         run: |
           echo "$ECR_REGISTRY"
