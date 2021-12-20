@@ -42,6 +42,7 @@ jobs:
           IMAGE_TAG: "1.0"
         run: |
           echo "$ECR_REGISTRY"
+          echo "configuration for sharing variables"
           echo "ECR_REGISTRY=$ECR_REGISTRY" >> $GITHUB_ENV
 #          cd ./image/
 #          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
