@@ -12,6 +12,9 @@ on:
     branches:
       - main
 
+env:
+  ECR_TEST: greatobi-ecr-dev
+
 jobs:
   build_image:
     runs-on: ubuntu-latest
@@ -47,6 +50,7 @@ jobs:
       - name: test01
         run: |
           echo "${{ env.ECR_REGISTRY }}"
+          echo $ECR_TEST
 
       - name: test02
         run: |
